@@ -1,0 +1,73 @@
+[project]
+name = "sewa-bibsikha-backend"
+version = "1.0.0"
+description = "FastAPI backend for sewa"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "aiosqlite>=0.20.0",
+    "alembic>=1.16.5",
+    "asyncpg>=0.30.0",
+    "fastapi[all]>=0.124.2",
+    "openai>=1.93.0",
+    "passlib[bcrypt]>=1.7.4",
+    "psycopg2-binary>=2.9.10",
+    "pyjwt>=2.10.1",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.20",
+    "sqlmodel>=0.0.24",
+    "bcrypt==4.0.1",
+    "boto3>=1.42.8",
+    "google-genai>=1.56.0",
+    "weasyprint>=67.0",
+    "jinja2>=3.1.6",
+    "aiosmtplib>=5.0.0",
+    "groq>=1.1.1",
+    "azure-storage-blob>=12.30.0",
+    "pymupdf>=1.28.2",
+    "openpyxl>=3.1.5",
+    "greenlet>=3.5.6",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.4.0",
+    "pytest>=9.0.1",
+    "ruff>=0.14.5",
+    "pytest-asyncio>=0.25.2",
+]
+
+# --- RUFF CONFIGURATION (Replaces Black, Isort, Flake8) ---
+[tool.ruff]
+line-length = 300
+indent-width = 4
+target-version = "py314"
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+    ".pytype",
+    ".ruff_cache",
+    ".venv",
+    "__pypackages__",
+    "venv",
+    "migrations"
+]
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`), Pycodestyle (`E`, `W`), isort (`I`), and more.
+# UP: Upgrade syntax (e.g. type Union -> |)
+# B: Bugbear (common bugs)
+# S: Bandit (security)
+# FAST: FastAPI specific rules
+select = ["E", "F", "I", "UP", "B", "S", "FAST"]
+ignore = []
+
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"] # Force your 'app' module to be sorted correctly
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"] # Ignore "assert" warnings in tests
+
+[tool.ruff.format]
+quote-style = "double"

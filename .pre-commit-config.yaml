@@ -1,0 +1,42 @@
+# .pre-commit-config.yaml
+default_install_hook_types: [pre-commit, pre-push]
+
+repos:
+  # 1. Standard checks (Fast, no deps)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+
+  # 2. Ruff (Linter & Formatter) - Extremely fast
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.1
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # 3. UV Checks (Ensure lockfile is valid)
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.1
+    hooks:
+      # Run the uv lock
+      - id: uv-lock
+      - id: uv-export
+
+  # # 4. LOCAL HOOKS (The "Best Practice" for uv)
+  # # We run these LOCALLY so they use the 'uv' environment.
+  # # This allows Mypy to find your installed libraries (FastAPI, Pydantic, etc).
+  # - repo: local
+  #   hooks:
+  #     - id: pytest
+  #       name: pytest
+  #       entry: uv run pytest
+  #       language: system
+  #       types: [python]
+  #       pass_filenames: false
+  #       stages: [pre-push] # Only run tests on push, not every commit (too slow)
