@@ -12,10 +12,12 @@ from app.database.connection import get_async_session
 from app.models.user import User, UserStatus, UserType
 from app.repository.user import UserRepository
 from app.schemas.user import UserResponse
+from app.storage import StorageProvider, get_storage_provider
 
 bearer_scheme = HTTPBearer(auto_error=False)
 
 SessionDep = Annotated[AsyncSession, Depends(get_async_session)]
+StorageDep = Annotated[StorageProvider, Depends(get_storage_provider)]
 BearerCredentialsDep = Annotated[HTTPAuthorizationCredentials | None, Depends(bearer_scheme)]
 
 

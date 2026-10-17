@@ -9,6 +9,7 @@ from alembic import context
 
 from app.conf.settings import settings
 import app.database.base
+from app.models.contact_submission import ContactSubmission  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

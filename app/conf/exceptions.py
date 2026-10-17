@@ -67,6 +67,22 @@ class ConflictException(AppHTTPException):
     error_code = "CONFLICT"
 
 
+class NotFoundException(AppHTTPException):
+    """Requested resource does not exist."""
+
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = "Resource not found"
+    error_code = "NOT_FOUND"
+
+
+class StorageException(AppHTTPException):
+    """File storage provider failed."""
+
+    status_code = status.HTTP_502_BAD_GATEWAY
+    default_detail = "File storage error"
+    error_code = "STORAGE_ERROR"
+
+
 class DatabaseException(AppHTTPException):
     """Database error."""
 

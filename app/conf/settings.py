@@ -57,12 +57,22 @@ class Settings(BaseSettings):
     # GMAIL_USERNAME: str
     # GMAIL_PASSWORD: str
 
-    # AWS
-    # AWS_ACCESS_KEY_ID: str
-    # AWS_SECRET_KEY_ID: str
-    # AWS_REGION: str = "us-east-1"
-    # AWS_S3_BUCKET_NAME: str = "kazirangaais3"
-    # AWS_S3_BASE_URL: str = "https://kazirangaais3.s3.ap-south-1.amazonaws.com/"
+    # File storage
+    STORAGE_PROVIDER: Literal["s3", "vercel_blob"] = "vercel_blob"
+    MAX_IMAGE_UPLOAD_MB: int = 5
+    # Several hero images share one request, which must stay under Vercel's ~4.5 MB body limit.
+    MAX_HERO_SLIDE_IMAGE_MB: int = 1
+
+    # AWS S3 (placeholders; set real values in .env)
+    AWS_ACCESS_KEY_ID: str = ""
+    AWS_SECRET_ACCESS_KEY: str = ""
+    AWS_REGION: str = "ap-south-1"
+    AWS_S3_BUCKET_NAME: str = ""
+    # Public base URL for objects, e.g. https://<bucket>.s3.<region>.amazonaws.com or a CloudFront URL
+    AWS_S3_BASE_URL: str = ""
+
+    # Vercel Blob (placeholder; set the store's read-write token in .env)
+    BLOB_READ_WRITE_TOKEN: str = ""
 
     @computed_field  # type: ignore[prop-decorator]
     @property
