@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from app.conf.settings import settings
 from app.routes.v1.admin import admin_router
 from app.routes.v1.auth import authentication_router
-from app.routes.v1.public import public_router
+from app.routes.v1.public_api import public_router
 from app.routes.v1.users import users_router
 
 router = APIRouter(prefix=settings.API_V1_STR)
